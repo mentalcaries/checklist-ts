@@ -6,3 +6,46 @@
   color: #2c3e50;
   margin-top: 60px;
 }
+
+.item__text {
+  margin: auto 16px;
+}
+
+.list__button {
+  background-image: url(./images/circle.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list__button_clicked {
+  background-image: url(./images/check-circle.svg);
+}
+
+.list__button_delete {
+  background-image: url(./images/x-circle.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end;
+}
+
+.item__elements {
+  display: flex;
+}
+
+.item__elements_disabled {
+  opacity: 0.4;
+}
