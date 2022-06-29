@@ -1,8 +1,12 @@
 import { Checklist } from './components/Checklist';
 import { ListItem } from './components/ListItem';
+import { v4 as uuidv4 } from 'uuid';
 import './style.css';
 
+
+
 export type Task = {
+  id: string
   title: string;
   completed: boolean;
   date: Date;
@@ -26,6 +30,7 @@ todoForm?.addEventListener('submit', (evt) => {
   if (input?.value === '' || input?.value === null) return;
   if (input) {
     const newTask = {
+      id: uuidv4(),
       title: input.value,
       completed: false,
       date: new Date(),
@@ -54,7 +59,7 @@ function loadTasks(): Task[] {
   else return [];
 }
 
-function deleteTask(taskName: string) {
-  const updatedTasks = tasks.filter((task) => taskName !== task.title);
+function deleteTask(taskId: string) {
+  const updatedTasks = tasks.filter((task) => taskId !== task.id);
   saveTasks(updatedTasks);
 }

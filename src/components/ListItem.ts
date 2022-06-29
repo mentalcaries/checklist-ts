@@ -2,7 +2,7 @@ import { Task } from '../main';
 
 export class ListItem {
   classList: any;
-  parentElement: any;
+  id: string;
   title: string;
   completed: boolean;
   date: Date;
@@ -11,6 +11,7 @@ export class ListItem {
   listItem : HTMLElement
 
   constructor(public task: Task,{ taskDeleter }:any) {
+    this.id = task.id
     this.title = task.title;
     this.completed = task.completed;
     this.date = task.date;
@@ -44,8 +45,7 @@ export class ListItem {
   };
 
   private _deleteItem =() =>{
-    this.taskDeleter(this.title);
-
+    this.taskDeleter(this.id);
     this.listItem.remove();
   }
 
