@@ -2,7 +2,7 @@ export class Checklist {
   private container: HTMLElement | null
 
   constructor(cardContainer: string) {
-    this.container = document.querySelector(cardContainer);
+    this.container = document.querySelector<HTMLLIElement>(cardContainer);
   }
 
 
