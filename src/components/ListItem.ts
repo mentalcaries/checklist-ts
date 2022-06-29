@@ -7,11 +7,15 @@ export class ListItem {
   completed: boolean;
   date: Date;
   querySelector: any;
+  taskDeleter: any;
+  listItem : HTMLElement
 
-  constructor(public task: Task) {
+  constructor(public task: Task,{ taskDeleter }:any) {
     this.title = task.title;
     this.completed = task.completed;
     this.date = task.date;
+    this.taskDeleter = taskDeleter
+    this.listItem = this.createItem()
   }
 
   createItem(): HTMLElement {
@@ -39,8 +43,10 @@ export class ListItem {
       .classList.toggle('list__button_clicked');
   };
 
-  private _deleteItem() {
-    this.parentElement.remove();
+  private _deleteItem =() =>{
+    this.taskDeleter(this.title);
+
+    this.listItem.remove();
   }
 
   private _setEventListeners(item: HTMLElement) {
@@ -54,13 +60,13 @@ export class ListItem {
   }
 
   getListItem() {
-    const listItem = this.createItem();
-    this._setEventListeners(listItem);
+    // const listItem = this.createItem();
+    this._setEventListeners(this.listItem);
 
     if (this.completed) {
-      this.toggleChecked(listItem);
+      this.toggleChecked(this.listItem);
     }
 
-    return listItem;
+    return this.listItem;
   }
 }
