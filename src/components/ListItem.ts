@@ -7,16 +7,19 @@ export class ListItem {
   completed: boolean;
   date: Date;
   querySelector: any;
-  taskDeleter: any;
-  listItem : HTMLElement
+  taskDeleter: (task: string) => void;
+  listItem: HTMLElement;
 
-  constructor(public task: Task,{ taskDeleter }:any) {
-    this.id = task.id
+  constructor(
+    public task: Task,
+    { taskDeleter }: { taskDeleter: (taskId: string) => void }
+  ) {
+    this.id = task.id;
     this.title = task.title;
     this.completed = task.completed;
     this.date = task.date;
-    this.taskDeleter = taskDeleter
-    this.listItem = this.createItem()
+    this.taskDeleter = taskDeleter;
+    this.listItem = this.createItem();
   }
 
   createItem(): HTMLElement {
@@ -44,10 +47,10 @@ export class ListItem {
       .classList.toggle('list__button_clicked');
   };
 
-  private _deleteItem =() =>{
+  private _deleteItem = () => {
     this.taskDeleter(this.id);
     this.listItem.remove();
-  }
+  };
 
   private _setEventListeners(item: HTMLElement) {
     const checkButton = item.querySelector('.list__button_check');
