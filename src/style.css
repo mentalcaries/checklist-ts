@@ -46,6 +46,6 @@
   display: flex;
 }
 
-.item__elements_disabled {
+.item__text_disabled {
   opacity: 0.4;
 }

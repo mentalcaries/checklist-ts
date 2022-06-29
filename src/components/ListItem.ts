@@ -1,32 +1,45 @@
 export class ListItem {
-  public listItem!: HTMLElement;
+  classList: any;
+  parentElement: any;
   constructor(public todo: string) {
     this.todo = todo;
   }
 
-  createItem() {
+  createItem(): HTMLElement {
     const item = document.createElement('li');
     item.className =
       'item list-group-item d-flex justify-content-between w-75 mb-3';
     item.innerHTML = `
             <div class="item__elements">
-              <button class="list__button"></button>
+              <button class="list__button list__button_check"></button>
               <p class="item__text">${this.todo}</p>
             </div>
-            <button class="list__button_delete"></button>
+            <button class="list__button list__button_delete"></button>
       `;
-      return item
+    return item;
   }
 
-  checkItem() {}
+  private _checkItem() {
+    this.parentElement
+      .querySelector('.item__text')
+      .classList.toggle('item__text_disabled');
+    this.classList.toggle('list__button_clicked');
+  }
 
-  deleteItem() {}
+  private _deleteItem() {
+    this.parentElement.remove();
+  }
 
-  setEventListeners() {
-    const checkButton = this.listItem?.querySelector('.list__button_check');
+  private _setEventListeners(item: HTMLElement) {
+    const checkButton = item.querySelector('.list__button_check');
+    const deleteButton = item.querySelector('.list__button_delete');
+    checkButton?.addEventListener('click', this._checkItem);
+    deleteButton?.addEventListener('click', this._deleteItem);
   }
 
   getListItem() {
-    this.listItem = this.createItem();
+    const listItem = this.createItem();
+    this._setEventListeners(listItem);
+    return listItem;
   }
 }

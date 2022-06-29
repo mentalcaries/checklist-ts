@@ -1,19 +1,15 @@
-import { Checklist } from './components/Checklist'
-import { ListItem } from './components/ListItem'
-import './style.css'
+import { Checklist } from './components/Checklist';
+import { ListItem } from './components/ListItem';
+import './style.css';
 
 
-// Checklist section
-// on form submit, add List item to section
+const checkList = new Checklist('.items-list');
 
-// List Item
-// Check button to mark completed
-// Delete button to remove element
+const todoForm = document.querySelector('.todo__form');
 
-const checkList = new Checklist(()=>{
-  console.log('render')
-}, ".items-list")
-
-
-const test = new ListItem('This is a test')
-checkList.addItem(test.createItem())
+todoForm?.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  const input = <HTMLInputElement>todoForm.querySelector('.todo__input');
+  checkList.addItem(new ListItem(input.value).getListItem());
+  input.value = ''
+});
