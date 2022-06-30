@@ -7,18 +7,21 @@ export class ListItem {
   completed: boolean;
   date: Date;
   querySelector: any;
-  taskDeleter: (task: string) => void;
+  taskDeleter: (task: string) => void;  
   listItem: HTMLElement;
+  taskUpdater: (taskId: string, isCompleted: boolean) => void;
 
   constructor(
     public task: Task,
-    { taskDeleter }: { taskDeleter: (taskId: string) => void }
+    { taskDeleter }: { taskDeleter: (taskId: string) => void },
+    { taskUpdater}: { taskUpdater: (taskId: string, isCompleted: boolean)=> void}
   ) {
     this.id = task.id;
     this.title = task.title;
     this.completed = task.completed;
     this.date = task.date;
     this.taskDeleter = taskDeleter;
+    this.taskUpdater = taskUpdater
     this.listItem = this.createItem();
   }
 
@@ -38,6 +41,7 @@ export class ListItem {
 
   private _setIsCompleted = () => {
     this.completed = !this.completed;
+    this.taskUpdater(this.id, this.completed)
   };
 
   private toggleChecked = (item: any) => {

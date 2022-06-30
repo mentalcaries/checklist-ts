@@ -44,7 +44,7 @@ todoForm?.addEventListener('submit', (evt) => {
 
 function addItem(task: Task) {
   const taskItem = new ListItem(task, {
-    taskDeleter: deleteTask,
+    taskDeleter: deleteTask}, {taskUpdater: updateTasks
   }).getListItem();
   checkList.addItem(taskItem);
 }
@@ -59,7 +59,16 @@ function loadTasks(): Task[] {
   else return [];
 }
 
+function updateTasks(taskId: string, isCompleted: boolean){
+  tasks.forEach((task)=> {
+    if (task.id === taskId){
+      task.completed = isCompleted
+    }
+  })
+  saveTasks(tasks)
+}
+
 function deleteTask(taskId: string) {
-  const updatedTasks = tasks.filter((task) => taskId !== task.id);
-  saveTasks(updatedTasks);
+  tasks = tasks.filter((task) => taskId !== task.id);
+  saveTasks(tasks);
 }
