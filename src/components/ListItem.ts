@@ -1,5 +1,7 @@
 import { Task } from '../main';
 
+
+
 export class ListItem {
   classList: any;
   id: string;
@@ -7,8 +9,8 @@ export class ListItem {
   completed: boolean;
   date: Date;
   querySelector: any;
-  taskDeleter: (task: string) => void;  
   listItem: HTMLElement;
+  taskDeleter: (task: string) => void;  
   taskUpdater: (taskId: string, isCompleted: boolean) => void;
 
   constructor(
